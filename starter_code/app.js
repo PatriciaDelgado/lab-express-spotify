@@ -40,6 +40,20 @@ app.use(express.static(__dirname + '/public'));
 app.get('/', (req, res, next) => {
   res.render('index');
 });
+app.get('/artists', (req, res, next) => {
+  
+
+  spotifyApi.searchArtists("bisbal")
+    .then(data => {
+      console.log("The received data from the API: ", data.body);
+      res.send(data.body)
+      //res.render('artists');
+      // ----> 'HERE WHAT WE WANT TO DO AFTER RECEIVING THE DATA FROM THE API'
+    })
+    .catch(err => {
+      console.log("The error while searching artists occurred: ", err);
+    })
+});
 
 
 app.listen(3000, () => console.log("My Spotify project running on port 3000 🎧 🥁 🎸 🔊"));
